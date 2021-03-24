@@ -1,0 +1,81 @@
+1 - composer create-project --prefer-dist laravel/laravel:^7.0 nome
+
+2 - configurar .env
+
+3 - criar banco 
+
+4 - criar tabelas: php artisan make:migration create_table_products --create=products (--create=products cria a chamada do Schema)
+Localização: database->migrations
+
+5 - Criar os campos 
+
+6 - Rodar a migração: php artisan migrate
+
+7 - Criar o model: php artisan make:model Product;
+Localização: App
+
+8 - Criar um controller: php artisan make:controller Api/ProductController a partir do model criar metodos de manipulação de products
+Localização: app/Http/controllers
+
+9 - Criar uma rota e apontar para o controller
+
+RECURSOS 
+
+Recursos para API: Paginação
+Recursos para API: Controller como recurso
+php artsian make:controller UserController --resource --api ( --resource (métodos de CRUD) --api(ignora métodos responsáveis por exibir form na tela de edição e criação))
+
+php artisan route:list : apresenta todas as rotas registradas na aplicação;
+
+Utiliza o retorno do eloquent(models) para converter o recurso em json - APONTA PARA UM OBJETO EM ESPECÍFICO
+php artisan make:resource ProductResource - Converte o Array do recurso em json
+Localização: App->resources
+
+Utiliza o retorno do eloquent(models) para converter em json - APONTA PARA UMA COLEÇÃO
+php artisan make:resource ProductCollection ou php artisan make:resource Product --collection
+
+Para tirar a chave data
+app->providers->appServiceProvider no médoto boot 
+JsonResource::withoutWrapping();
+Colocar algum nome diferente de data: JsonResource::wrap('Pepers');
+
+Recurso para API: Autenticação básica
+
+Seed é o conceito de "alimentar" sua aplicação com dados de teste. 
+Em Laravel, classes Seeders são responsáveis por inserir os dados de teste na sua aplicação.
+php artisan make:seeder UsersSeeder
+Cria um usuário com base em database->factories
+
+Em seeds->DatabaseSeeder descomentar a linha no método: run
+
+para rodar: php artisan db:seed
+
+em routes adicionar um middleware
+
+Armazenar token - HTTP - Não tem estado
+
+FILTROS
+
+Criar seeder
+php artisan make:factory ProductFactory - os campos fakes
+configurar: seeds->DatabaseSeeder
+php artisan db:seed
+php artisan make:seeder ProductTableSeeder
+
+Filtrar dados
+Repository para separar a query do controller
+
+Filtragem de campos ?fields=campo1,campo2
+Verificar no método index se existe fields e fazer um select nos campos no repository
+
+Condições na filtragem &conditons=name:Teste,price:38.99
+Verificar no método index se existe e fazer um where na query no repository
+
+VALIDAÇÕES
+php artisan make:request ProductRequest
+Localização: app->Http->request
+
+Adicionar as rules no método rules
+
+Adicionar no header: accept: Application/json - para trabalhar com respostas em json
+obs: app->exceptions->handler método render 

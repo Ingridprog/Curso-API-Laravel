@@ -1,0 +1,59 @@
+PROTOCOLO HTTP
+    Hipertext Transfer Protocol 
+    Request(tem cabeçalhos) - Processamento - Response
+    Verbos: 
+        - GET
+        - POST
+        - PUT 
+        - PATCH
+        - DELETE
+        - OPTIONS
+    Códigos que representam o processamento da informação: Status code: 
+        200: SUCCESS
+        300: REDIRECT 
+        400: CLIENT ERROR
+        500: SERVER ERROR
+
+WEBSERVICES - categoria de API
+    Web Service é uma solução utilizada na integração de sistemas e na 
+    comunicação entre aplicações diferentes. Com esta tecnologia é possível 
+    que novas aplicações possam interagir com aquelas que já existem e que sistemas 
+    desenvolvidos em plataformas diferentes sejam compatíveis. Os WebServices são 
+    componentes que permitem às aplicações enviar e receber dados. Cada aplicação 
+    pode ter a sua própria "linguagem", que é traduzida para uma linguagem universal, 
+    um formato intermediário como XML, Json, CSV, etc. Por meio da REDE - HTTP
+
+    Tipos:
+        SOAP - WSDL
+        REST
+        RPC 
+        GRAPHQL
+
+WEBSERVICES X APIs
+    API - Application Interface Programing:
+    - Conjunto de rotinas e padrões estabelecidos para que outras aplicações possam consumir 
+    as funcionalidades de determinado programa sem o conhecimento da implemantação do mesmo.
+
+    Mais amplo - Não necessariamente depende da rede: Ex. Uma interface pública de um objeto também é uma API
+
+REST - Representational State Transfer - mais semântica para o protocolo HTTP
+    Representação é feita por meio da linguagem universal
+    - Conjunto de princípios para construção de arquiteturas baseadas no protocolo HTTP, trazendo 
+    mais semântica na sua utilização do protocolo e aproveitando todo o poder deste. 
+    
+    URI identifica e uma URL localiza um recurso, entretanto, localizadores também são identificadores, ou seja, as URLs são um subconjunto do conjunto de URIs.
+
+    Cada requisição é única - não matém estados
+
+    matém estados por sesions
+
+    Verbo aplicado em cima de um recurso diz como o recurso vai se comportar 
+
+    status code: Cada comportamento do resultado do processamento 
+
+https://github.com/CodeExpertsLearning/curso-api-rest-com-laravel
+
+Auxiliares: HTTP_CLIENT: Postman
+
+Acesso final para um recurso == Endpoint
+

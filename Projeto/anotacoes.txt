@@ -1,0 +1,86 @@
+1. Criar: composer create-project --prefer-dist laravel/laravel:^7.0 nome
+
+2. Criar o banco
+
+3. Instalar a tabela de migration inicial: php artisan migrate:install
+
+4. Criar uma migration: php artisan make:migration create_table_nome --create=nome
+
+5. Associações: 
+    Um para muitos: $table->foreign('campo_de_chave_estrangeira')->references('chave_primaria')->on('table');
+    Muitos para muitos: Criar tabela intermediária; Associar os dois id;
+
+6. Executar migrassões: php artisan migrate
+
+7. Model: php artisan make:model nome
+    belongsTo - realState tem um user
+    hasMany - user tem muitos realState
+
+8. Controller: php artisan make:controller nome
+
+9. Criar um user
+
+PS C:\Users\ingri\Documents\ingrid\API-LARAVEL\Projeto\meuImovel> php artisan tinker
+Psy Shell v0.10.6 (PHP 7.2.28 — cli) by Justin Hileman
+>>> $user = new \App\User();
+=> App\User {#4212}
+>>> $user->name = 'Ingrid';
+=> "Ingrid"
+>>> $user->email = 'ingrid@uol.com.br';
+=> "ingrid@uol.com.br"
+>>> $user->password = bcrypt('12345');
+=> "$2y$10$Bb9EnCIaPClTpqUc27DETOLZC.F/Jv3gLNd7LLiQI37NcxB.ZRKvO"
+>>> $user->save();
+=> true
+
+10. Validações: php artisan make:request nome
+
+11. php artisan ui bootstrap --auth para criar a pasta Auth
+
+12. Muitos para muitos 
+    return $this->belongsToMany(Category::class);  realState tem muitas categorias
+    return $this->belongsToMany(RealState::class); categorias tem muitos realState
+
+13. JWT - Json web token - compartilhar informações entre aplicações - identificação - autorização
+    Especificação: JOSE - json object signing e encryption: JWT/JWA/JWS/JWK/JWE
+
+    base 64 - header(info sobre o token) - body(payload) - autenticidade do token(segurança) hash do header + hash do body + chaves
+
+    Indicar o token no header Authorization
+
+14. https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
+    
+    composer require tymon/jwt-auth:1.0.1
+    php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+    php artisan jwt:secret para gerar a secret .env
+
+No user.php Implmentar a interface JWTSubject e criar os métodos
+
+Em config alterar o auth.php - 'driver' => 'jwt'
+
+15. php artisan make:controller Api/Auth/LoginJwtControinJwtController
+
+em config jwt.php mudar o jwt para Tymon\JWTAuth\Providers\JWT\Namshi::class
+
+16. Proteger rotas
+    Em http Kernel.php 
+    'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+
+17. Filtros
+
+Criar migrations e models de country, city, state e address
+
+obs: voltar uma migration errada: php artisan migrate:rollback --step=1
+
+18.
+Negociação de conteúdo: 
+client dizer quais mimetypes consegue trabalhar
+Cabeçalho: accept e mimetype: Application/json
+
+Entrega navegação completa:
+Com o HATEOAS, um cliente interage com uma aplicação de rede cujos servidores de aplicação fornecem informações dinamicamente por meio de hipermídia . Um cliente REST precisa de pouco ou nenhum conhecimento prévio sobre como interagir com um aplicativo ou servidor além de um entendimento genérico de hipermídia.
+Em contraste, clientes e servidores em CORBA interagem por meio de uma interface fixa compartilhada por meio de documentação ou uma linguagem de descrição de interface (IDL).
+As restrições impostas pelo HATEOAS separam cliente e servidor. Isso permite que a funcionalidade do servidor evolua de forma independente.
+
+
+19. cria o storage na pasta public do projeto: php artisan storage:link
